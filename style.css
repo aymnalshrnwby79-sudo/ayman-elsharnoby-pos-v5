@@ -574,3 +574,79 @@ input[placeholder*="بحث"]:focus {
 .test-color{
   color:red;
 }
+/* ==========================================
+   باتش تطوير كاردات الإحصائيات والتصنيفات للموبايل
+   ========================================== */
+
+/* تقسيم الكاردات لشبكة ذكية جنب بعض */
+.stats-container, .dashboard-stats, .categories-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    padding: 10px !important;
+}
+
+/* تخلي أول كارد (إجمالي اليوم) يفرش بعرض الشاشة كلها لوحده */
+.stats-container >= div:first-child, 
+.dashboard-stats >= div:first-child,
+.stat-card:first-child {
+    grid-column: 1 / -1 !important;
+    background: linear-gradient(135deg, #0b0b0b, #1a1a1a) !important;
+    border: 1px solid #d4af37 !important; /* إطار ذهبي ملكي */
+}
+
+/* تنسيق الكاردات نفسها عشان تبقى خفيفة ومظبوطة */
+.stat-card, .category-btn, .filter-btn {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 12px 8px !important;
+    background: #111111 !important;
+    border: 1px solid #222222 !important;
+    border-radius: 12px !important;
+    transition: transform 0.2s ease !important;
+}
+
+/* ضبط الأيقونات والنصوص عشان ما تطلعش بره الكارد في الموبايلات الصغيرة */
+.stat-card i, .stat-card span:first-child {
+    font-size: 1.5rem !important;
+    margin-bottom: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.stat-card h3, .stat-card p, .stat-card span {
+    font-size: 13px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+    margin: 2px 0 !important;
+}
+
+/* كاردات الديون (لون أحمر خفيف هادي) */
+.stat-card.debt, [data-type="debt"] {
+    border-left: 4px solid #ff4d4d !important;
+    background: rgba(255, 77, 77, 0.05) !important;
+}
+
+/* كاردات الأرباح (لون أخضر خفيف هادي) */
+.stat-card.profit, [data-type="profit"] {
+    border-left: 4px solid #2ecc71 !important;
+    background: rgba(46, 204, 113, 0.05) !important;
+}
+
+/* للشاشات الأكبر شوية (التابلت والكمبيوتر) يفتحوا 4 كاردات جنب بعض تلقائي */
+@media (min-width: 768px) {
+    .stats-container, .dashboard-stats, .categories-container {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+    .stats-container >= div:first-child, 
+    .dashboard-stats >= div:first-child,
+    .stat-card:first-child {
+        grid-column: auto !important;
+    }
+}
